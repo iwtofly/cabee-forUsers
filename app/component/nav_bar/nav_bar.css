@@ -1,0 +1,16 @@
+.nav_bar{
+	position: absolute;
+	width: 70%;
+	height: 100%;
+	text-align: center;
+	color: #1d4c6c;
+}
+ul {
+    list-style: none;
+    margin:0;
+    padding:0;
+}
+
+li{
+	padding: 10px;
+}

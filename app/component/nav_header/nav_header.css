@@ -1,0 +1,18 @@
+.nav-header {
+  z-index: 2;
+  height: 50px;
+  position: absolute;
+  background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0));
+  background: -webkit-linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0));
+  width: 100%;
+}
+
+.nav-btn {
+    margin: 12.5px;
+    width: 25px;
+    height: 25px;
+    background-image: url("imgs/nav-btn.png");
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+}

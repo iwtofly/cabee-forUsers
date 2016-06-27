@@ -1,0 +1,13 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+.my-table{
+	max-width: 960px;
+	text-align: center;
+	margin: 0 auto;
+}
+.modal_img{
+	width: 320px;
+	height: 250px;
+}
