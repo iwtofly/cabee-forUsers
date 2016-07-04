@@ -1,6 +1,8 @@
 import React from 'react';
 
 import VideoPlayer from '../component/video_player/video_player.jsx'
+import StatusTable from '../component/video_player/StatusTable.js'
+
 
 var urlList=[
   {text:"video1" ,duration:204 ,
@@ -19,6 +21,7 @@ var Video_Cached = React.createClass({
             Hello BYR!!!<br />
             <h2>video with cache</h2>
             <VideoPlayer urlList={urlList}/>
+            <StatusTable/>
          </div>
       );
    } 

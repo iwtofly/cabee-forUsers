@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import pubsub from 'pubsub-js';
 
 import './video.less';
 
@@ -178,6 +179,7 @@ var VideoPlayer = React.createClass({
     var videoDuration = durationCompute(this.props.urlList);
     var totalDuration=videoDuration[this.props.urlList.length-1];
     return {
+      pubInfo:this.props.urlList,
       videoIndex:0,
       playing: false,
       percentPlayed: 0,
@@ -193,6 +195,23 @@ var VideoPlayer = React.createClass({
   },
   componentDidMount:function(){
     console.log("videoplay didmount")
+    for(var k=0;k<this.props.urlList.length;k++){
+      Object.defineProperty(this.state.pubInfo[k], "buf", {
+        enumerable: true,
+        configurable: true,
+        writable: true,
+        value: "static"
+      });
+     this.state.pubInfo[k].buf=0;
+     console.log(this.state.pubInfo[k]);
+
+
+     pubsub.publish("status",this.state.pubInfo);
+     pubsub.publish("index",this.state.videoIndex);
+
+
+
+    }
   },
   componentWillUnmount:function(){
     console.log("videoplay willunmount ")
@@ -237,7 +256,20 @@ var VideoPlayer = React.createClass({
     this.setState({duration: duration});
   },
   updateBufferBar: function(buffered){
-    this.setState({percentBuffered: buffered});
+    var index=this.state.videoIndex;
+    this.setState({
+      percentBuffered: buffered,
+    });
+    this.state.pubInfo[index].buf=(this.state.totalDuration*buffered/100-timebefore)/this.props.urlList[index].duration*100 ;
+
+
+
+     pubsub.publish("status",this.state.pubInfo);
+     pubsub.publish("index",this.state.videoIndex);
+
+
+
+
   },
   updateProgressBar: function(times){
     var percentPlayed = (100 / this.state.totalDuration) * (times.currentTime+timebefore);
@@ -299,7 +331,7 @@ var VideoPlayer = React.createClass({
   if(progress_barElm.className != 'progress_bar_ref'){
     progress_barElm = evt.target.parentElement;
   };
-  
+  console.log("buf: "+this.state.pubInfo[this.state.videoIndex].buf+"%")
   var progBarDims = progress_barElm.getBoundingClientRect(); //返回元素的大小及其相对于视口的位置
   var clickPos = evt.clientX - progBarDims.left;  // 5 correction factor
 
@@ -315,9 +347,15 @@ var VideoPlayer = React.createClass({
     percentPlayed:seekPos/this.props.totalDuration,
   },function(){
     ReactDOM.findDOMNode(this.refs.video).currentTime = seekPos-timebefore;
-
   });
-    ReactDOM.findDOMNode(this.refs.video).autoplay=true;
+  console.log(this.state.playing)
+    if (this.state.playing==true){
+        ReactDOM.findDOMNode(this.refs.video).play();
+        ReactDOM.findDOMNode(this.refs.video).autoplay=true;
+      }else{
+        ReactDOM.findDOMNode(this.refs.video).pause();
+        ReactDOM.findDOMNode(this.refs.video).autoplay=false;
+     }
   },
   render: function(){
     return (
@@ -334,7 +372,7 @@ var VideoPlayer = React.createClass({
                updatePlaybackStatus={this.videoEnded}
                bufferChanged={this.updateBufferBar} />
         <div className="video_controls" ref="videoControls">
-          <VideoProgressBar handleProgressClick={this.seekVideo} totalDuration={this.state.totalDuration} percentPlayed={this.state.percentPlayed} percentBuffered={this.state.percentBuffered} videoIndex={this.state.videoIndex}/>
+          <VideoProgressBar handleProgressClick={this.seekVideo} pubInfo={this.state.pubInfo} totalDuration={this.state.totalDuration} percentPlayed={this.state.percentPlayed} percentBuffered={this.state.percentBuffered} videoIndex={this.state.videoIndex}/>
           <VideoPlaybackToggleButton handleTogglePlayback={this.togglePlayback} playing={this.state.playing} />
           <VideoVolumeButton muted={this.state.muted} volumeLevel={this.state.volumeLevel} toggleVolume={this.toggleMute} changeVolume={this.handleVolumeChange} />
           <VideoTimeIndicator  duration={this.state.duration} totalDuration={this.state.totalDuration} currentTime={this.state.currentTime} />
