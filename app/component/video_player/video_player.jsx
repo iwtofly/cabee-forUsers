@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import './video.css';
+import './video.less';
 
 
 Number.prototype.toVideoDuration = function(){
@@ -119,44 +119,51 @@ var Video = React.createClass({
     this.props.bufferChanged(buffered);
   },
   componentDidMount: function(){
-
+    console.log("video didmount")
     var video=ReactDOM.findDOMNode(this);
-    console.log(video);
-    console.log("this:"+this );
+    // console.log(video);
 
     var $this = this;
-    console.log("$this:"+$this );
+    
 
     // Sent when playback completes
     video.addEventListener('ended', function(e){
       $this.playbackChanged(e.target.ended);
     }, false);
 
-    var bufferCheck = setInterval(function(){
+    this.bufferCheck = setInterval(function(){
       var percent=0;
     try{
       // console.log(video.buffered.end(0));
       percent = ((video.buffered.end(video.buffered.length-1)+timebefore) / $this.props.totalDuration * 100);
-      console.log("try"+percent);
+      // console.log("try"+percent);
       // console.log(video.buffered.length);
     } catch(ex){
       console.log(ex);
       percent = 0;
     }
       $this.updateBuffer(percent);
-      if (percent == 100) { clearInterval(bufferCheck); }
-    }, 500);
+      if (percent == 100) { clearInterval(this.bufferCheck); }
+    }.bind(this), 500);
 
     video.addEventListener('durationchange', function(e){
       $this.updateDuration(e.target.duration);
-    }, false);
+    }.bind(this), false);
 
     video.addEventListener('timeupdate', function(e){
       $this.updateCurrentTime({
         currentTime: e.target.currentTime,
         duration: e.target.duration
       });
-    }, false)
+    }.bind(this), false)
+  },
+  componentWillUnmount:function(){
+    this.bufferCheck && clearInterval(this.bufferCheck);
+    this.bufferCheck = false;
+    console.log("video willunmout")
+     this.bufferCheck && this.setState({
+     loading: false
+     });
   },
   render: function(){
     return (
@@ -185,7 +192,10 @@ var VideoPlayer = React.createClass({
     };
   },
   componentDidMount:function(){
-    console.log(this.state)
+    console.log("videoplay didmount")
+  },
+  componentWillUnmount:function(){
+    console.log("videoplay willunmount ")
   },
   videoEnded: function(){   
     var urlLength=this.props.urlList.length;
@@ -199,7 +209,7 @@ var VideoPlayer = React.createClass({
         ReactDOM.findDOMNode(this.refs.video).pause();
         ReactDOM.findDOMNode(this.refs.video).autoplay=false;
         timebefore=0;
-      });
+      }.bind(this));
     }else{
       alert("点击确定按钮继续播放视频")
       timebefore+=this.props.urlList[this.state.videoIndex].duration;
@@ -209,7 +219,7 @@ var VideoPlayer = React.createClass({
       },function(){
         ReactDOM.findDOMNode(this.refs.video).play();
         ReactDOM.findDOMNode(this.refs.video).autoplay=true;
-      });
+      }.bind(this));
     }
   },
   togglePlayback: function(){
