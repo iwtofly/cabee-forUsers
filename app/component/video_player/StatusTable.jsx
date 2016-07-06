@@ -40,20 +40,37 @@ var StatusTable=React.createClass({
 		console.log(index);
 		var List=this.state.info.map((info,n)=>{
 			return(
-				<div>
-				video: {n+1}
-				<p>bufferd:{Math.floor(this.state.info[n].buf*10)/10}%</p>
-				</div>
+				<tr>
+					<td>{n+1}</td>
+					<td>{Math.floor(this.state.info[n].buf*10)/10}%</td>
+				</tr>
 			)
 		})
 		return (
-			<div>
-				{List}
-				<p>There are {this.state.info.length} Videos intotal </p>
-			</div>)
+			<div className='StatusTable'>
+				<div className="table-responsive">
+					<table className="table table-bordered">
+						<thead>
+							<tr className="info"> 
+								<th>FileIndex</th>
+								<th>buffer-progress</th>
+							</tr>
+						</thead>
+						<tbody>
+							{List}
+						</tbody>
+					</table>
+				</div>
+			</div>
+
+		)
 	}
 })
 
 export default StatusTable;
 
 // <h5>url:{this.state.info[0].url}</h5>
+// 
+// 
+// {List}
+				// <p>There are {this.state.info.length} Videos intotal </p>

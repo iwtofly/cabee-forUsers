@@ -1,7 +1,7 @@
 import React from 'react';
 
 import VideoPlayer from '../component/video_player/video_player.jsx'
-import StatusTable from '../component/video_player/StatusTable.js'
+import StatusTable from '../component/video_player/StatusTable.jsx'
 
 
 var urlList=[

@@ -12,6 +12,11 @@ import Video_Cached from './app/pages/video_cached.jsx'
 import Video_Normal from './app/pages/video_normal.jsx'
 
 import './public/main.css'
+
+var mainStyle={
+	backgroundColor:'#ccc',
+};
+
 var MainApp = React.createClass({
 	getInitialState:function(){
 		return{
