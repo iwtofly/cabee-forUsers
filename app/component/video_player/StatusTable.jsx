@@ -37,10 +37,9 @@ var StatusTable=React.createClass({
 	},
 	render: function() {
 		var index=this.getIndex()
-		console.log(index);
 		var List=this.state.info.map((info,n)=>{
 			return(
-				<tr>
+				<tr key={n}>
 					<td>{n+1}</td>
 					<td>{Math.floor(this.state.info[n].buf*10)/10}%</td>
 				</tr>
