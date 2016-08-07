@@ -7,9 +7,10 @@ import NavBar from './app/component/nav_bar/nav_bar.jsx'
 
 import Users from './app/pages/Users.jsx';
 import App from './app/pages/App.jsx';
-import NoMatch from './app/pages/NoMatch.jsx'
+import NoMatch from './app/pages/NoMatch.jsx';
+import video_ListPage from './app/pages/video_ListPage.jsx';
 import Video_Cached from './app/pages/video_cached.jsx'
-import Video_Normal from './app/pages/video_normal.jsx'
+
 
 import './public/main.css'
 
@@ -46,9 +47,13 @@ ReactDOM.render(
 	<Router history={hashHistory} >
 		<Route path="/" component={MainApp}>
 			<IndexRoute component={App}/>
-	    	<Route path="users" component={Users}/>
-	    	<Route path="cached" component={Video_Cached}/>
-	    	<Route path="normal" component={Video_Normal}/>
+	    	<Route path="/users" component={Users}/>
+	    	<Route path="/videos" component={video_ListPage}>
+	    		<IndexRoute component={video_ListPage}/>
+	    		{/*<Route path="/video/:videoId" component={Video_Cached} />*/}
+	    		<Route path="a" component={Video_Cached} />
+	    	</Route>
+	    	<Route path="/cached" component={Video_Cached} />
 	    	<Route path="*" component={NoMatch}/>
 	    </Route>
     </Router>

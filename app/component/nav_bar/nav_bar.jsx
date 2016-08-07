@@ -38,9 +38,16 @@ var NavBar=React.createClass({
 				<li>
 					<Button bsStyle="info" onClick={this.changeNavLi} dataUrl={this.state.dataUrl3}><a>HOME</a></Button>
 				</li>*/}
-				<li><Link to="/cached" activeStyle={{color:'red'}}>video with cache</Link></li>
-				<li><Link to="/normal" activeStyle={{color:'red'}}>video without cache</Link></li>
-				<li><Link to="/users" activeStyle={{color:'red'}}>picture</Link></li>
+				
+				<li>
+					<Link to="/videos" activeStyle={{color:'red'}}>videoList</Link>
+				</li>
+				<li>
+					<Link to="/cached" activeStyle={{color:'red'}}>video-detail</Link>
+				</li>
+				<li>
+					<Link to="/users" activeStyle={{color:'red'}}>pictureList</Link>
+				</li>
 			</ul>
 			</div>
 		)

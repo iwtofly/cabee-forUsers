@@ -14,17 +14,48 @@ var urlList=[
 ];
 
 // class Video_Cached extends React.Component {
-var Video_Cached = React.createClass({
-   render() {
-      return (
-         <div>
-            Hello BYR!!!<br />
-            <h2>video with cache</h2>
-            <VideoPlayer urlList={urlList}/>
-            <StatusTable/>
-         </div>
-      );
-   } 
-})
+class Video_Cached extends React.Component {
+  // getInitialState:function(){
+  //   return{
+  //     videoId:null,
+  //     urlList:[],
+  //   }
+  // },
+  // componentDidMount:function(){
+  //   this.setState({
+  //     videoId:this.props.params.videoId
+  //   })
+
+    //TODO:通过Ajax请求获取要播放的视频内容信息
+    //以下作为参考
+    // $.ajax({
+    //   url: ,
+    //   dataType: 'json',
+    //   cache: false,
+    //   success: function(data) {
+    //     this.setState({urlList: data});
+    //   }.bind(this),
+    //   error: function(xhr, status, err) {
+    //     console.error(this.props.url, status, err.toString());
+    //   }.bind(this)
+    // });
+  // },
+  render() {
+    var topStyle={
+      height:'30px',
+     }
+    var HStyle={
+      textAlign:'center',
+    }
+    return (
+       <div>
+          <div style={topStyle}></div>
+          <h2  style={HStyle}>video with cache</h2> {/*后期需要改成获取到的videoName*/}
+          <VideoPlayer urlList={urlList}/> {/*后期需要改成this.state.urlList*/}
+          <StatusTable/>
+       </div>
+    );
+  } 
+}
 
 export default Video_Cached;	
