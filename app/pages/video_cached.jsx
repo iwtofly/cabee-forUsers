@@ -29,7 +29,7 @@ class Video_Cached extends React.Component {
     //TODO:通过Ajax请求获取要播放的视频内容信息
     //以下作为参考
     // $.ajax({
-    //   url: ,
+    //   url: IP地址+端口号+videoId,
     //   dataType: 'json',
     //   cache: false,
     //   success: function(data) {
@@ -46,7 +46,6 @@ class Video_Cached extends React.Component {
     }
     return (
        <div>
-          <div style={topStyle}></div>
           <h2  style={HStyle}>video with cache</h2> {/*后期需要改成获取到的videoName*/}
           <VideoPlayer urlList={urlList}/> {/*后期需要改成this.state.urlList*/}
           <StatusTable/>

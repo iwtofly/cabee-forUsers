@@ -10,3 +10,34 @@
 	text-align: center;
 	
 }
+
+/*app.js样式*/
+.topDiv .topImg{
+	width:100%;
+}
+.content{
+	background-color:#FFF0F5;
+	height: 100%;
+	margin-top: 10px;
+}
+.fnlTittle{
+	text-align: center;
+	margin-top: 10px;
+	color: #1c8ae1;
+}
+.labTittle{
+	color: gray;
+	text-indent: 200px;
+}
+.article{
+	width: 90%;
+	margin: 10px auto;
+	padding: 5px;
+	background: white;
+}
+
+.article p{
+	font-size: 14px;
+	line-height: 1.7em;
+	color: gray;
+}
