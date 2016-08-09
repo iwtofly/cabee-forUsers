@@ -4,12 +4,14 @@ import { Router ,Route ,IndexRoute ,hashHistory } from 'react-router';
 
 import NavHeader from './app/component/nav_header/nav_header.jsx'
 import NavBar from './app/component/nav_bar/nav_bar.jsx'
+import VideoList from './app/component/VideoList.jsx';
 
 import Users from './app/pages/Users.jsx';
 import App from './app/pages/App.jsx';
 import NoMatch from './app/pages/NoMatch.jsx';
 import video_ListPage from './app/pages/video_ListPage.jsx';
-import Video_Cached from './app/pages/video_cached.jsx'
+import Video_Cached from './app/pages/video_cached.jsx';
+
 
 
 import './public/main.css'
@@ -31,11 +33,15 @@ var MainApp = React.createClass({
 	},
 	render:function(){
 		var page_class=this.state.nav_show ? 's-page':'h-page';
+		var topStyle={
+	        height:'30px',
+	       }
 		return(
 			<div>
 				<NavBar transform={ this.transform }/>
 				<div id="cur-page" className={page_class}>
 					<NavHeader transform={this.transform}/>    {/*留作用于显示侧面Nav_Bar*/}
+					<div style={topStyle}></div>
 					{this.props.children}
 				</div>
 			</div>
@@ -49,9 +55,9 @@ ReactDOM.render(
 			<IndexRoute component={App}/>
 	    	<Route path="/users" component={Users}/>
 	    	<Route path="/videos" component={video_ListPage}>
-	    		<IndexRoute component={video_ListPage}/>
+	    		<IndexRoute component={VideoList}/>
 	    		{/*<Route path="/video/:videoId" component={Video_Cached} />*/}
-	    		<Route path="a" component={Video_Cached} />
+	    		<Route path="b" component={Video_Cached} />
 	    	</Route>
 	    	<Route path="/cached" component={Video_Cached} />
 	    	<Route path="*" component={NoMatch}/>

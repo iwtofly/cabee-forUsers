@@ -10,35 +10,41 @@ var videos=[
 
 class videoList extends React.Component{
 	render(){
+		var HStyle={
+	        textAlign:'center',
+	    }
 		return(	
-			<div className='StatusTable'>
-				<div className="table-responsive">
-					<table className="table table-bordered">
-						<thead>
-							<tr className="info"> 
-								<th>VideoName</th>
-								<th>how many blocks</th>
-								<th>paly</th>
-							</tr>
-						</thead>
-						<tbody>
-							{
-								videos.map(
-									(video,n)=>(
-										<tr key={n}>
-											<td className="text-center">{video.name}</td>
-											<td className="text-center">{video.blocks}</td>
-											<td className="text-center">
-												<Link to={"/videos/video/"+video.videoId}>
-												<span className="btn btn-default">Play</span>
-												</Link>
-											</td>
-										</tr>
+			<div>
+				<h2  style={HStyle}>Videolist</h2>
+				<div className='StatusTable'>
+					<div className="table-responsive">
+						<table className="table table-bordered">
+							<thead>
+								<tr className="info"> 
+									<th>VideoName</th>
+									<th>how many blocks</th>
+									<th>play</th>
+								</tr>
+							</thead>
+							<tbody>
+								{
+									videos.map(
+										(video,n)=>(
+											<tr key={n}>
+												<td className="text-center">{video.name}</td>
+												<td className="text-center">{video.blocks}</td>
+												<td className="text-center">
+													<Link to={"/videos/video/"+video.videoId}>
+													<span className="btn btn-default">Play</span>
+													</Link>
+												</td>
+											</tr>
+										)
 									)
-								)
-							}
-						</tbody>
-					</table>
+								}
+							</tbody>
+						</table>
+					</div>
 				</div>
 			</div>
 			

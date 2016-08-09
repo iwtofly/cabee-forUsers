@@ -140,7 +140,7 @@ var Video = React.createClass({
       // console.log("try"+percent);
       // console.log(video.buffered.length);
     } catch(ex){
-      console.log(ex);
+      // console.log(ex);
       percent = 0;
     }
       $this.updateBuffer(percent);

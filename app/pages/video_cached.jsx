@@ -41,9 +41,6 @@ class Video_Cached extends React.Component {
     // });
   // },
   render() {
-    var topStyle={
-      height:'30px',
-     }
     var HStyle={
       textAlign:'center',
     }
