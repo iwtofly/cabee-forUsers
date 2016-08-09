@@ -1,18 +1,24 @@
  var path=require('path');
+ var webpack = require('webpack');
+ 
  var config = {
    entry: './main.js',
 	
    output: {
       path:'./',
       publicPath: '/',
-      filename: 'index.js',
+      filename: 'bundle.js',
       // publicPath:'http://localhost:7777/'
    },
 	
    devServer: {
       inline: true,
-      port: 7777
+      // port: 7777
    },
+    plugins: [
+      new webpack.optimize.OccurrenceOrderPlugin(),
+      new webpack.HotModuleReplacementPlugin()
+   ],
 
    module: {
       loaders: [ 

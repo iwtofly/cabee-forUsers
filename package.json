@@ -16,16 +16,19 @@
   },
   "devDependencies": {
     "css-loader": "^0.23.1",
+    "express": "^4.14.0",
     "less": "^2.7.1",
     "less-loader": "^2.2.3",
     "react-hot-loader": "^1.3.0",
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.7",
     "webpack": "^1.13.1",
-    "webpack-dev-server": "^1.14.1"
+    "webpack-dev-middleware": "^1.6.1",
+    "webpack-dev-server": "^1.14.1",
+    "webpack-hot-middleware": "^2.12.2"
   },
   "scripts": {
-    "start": "webpack-dev-server --hot"
+    "start": "node server.js"
   },
   "author": "wf",
   "license": "ISC"
